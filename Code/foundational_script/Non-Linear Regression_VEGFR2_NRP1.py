@@ -5,9 +5,13 @@ import os
 import pandas as pd
 
 # Change the working directory 
+
 print(os.getcwd()) # Prints the current working directory
+# Current directories
+justin = 'C:/Users/dhlpablo_m2/Desktop/Git/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
+lionel = 'C:/Users/Imoukhuede lab/OneDrive - UW/Desktop/GitHub/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 # Provide the new path here
-os.chdir('C:/Users/Imoukhuede lab/OneDrive - UW/Desktop/GitHub/meta-analysis-for-VEGF-signaling/data') 
+os.chdir(lionel) 
 #C:/Users/lione/Desktop/GitHub/meta-analysis-for-VEGF-signaling/data
 # Prints the new working directory
 print(os.getcwd())
@@ -19,23 +23,23 @@ def import_and_clean_data(file_name, sheet_name, columns):
     cleaned_data = data.loc[:, columns].dropna()
     return cleaned_data
 
-vegfa165_vegfr2l05 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "Sheet1", ["Time 0.5nM", "RU 0.5nM"])
-vegfa165_vegfr2l1 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "Sheet1", ["Time 1nM", "RU 1nM"])
-vegfa165_vegfr2l2 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "Sheet1", ["Time 2nM", "RU 2nM"])
-vegfa165_vegfr2l4 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "Sheet1", ["Time 4nM", "RU 4nM"])
-vegfa165_vegfr2l8 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "Sheet1", ["Time 8nM", "RU 8nM"])
+vegfa165_vegfr2l05 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "sheet1", ["Time 0.5nM", "RU 0.5nM"])
+vegfa165_vegfr2l1 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "sheet1", ["Time 1nM", "RU 1nM"])
+vegfa165_vegfr2l2 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "sheet1", ["Time 2nM", "RU 2nM"])
+vegfa165_vegfr2l4 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "sheet1", ["Time 4nM", "RU 4nM"])
+vegfa165_vegfr2l8 = import_and_clean_data("VEGFA165_VEGFR2_0.5-8nMLu2023.xlsx", "sheet1", ["Time 8nM", "RU 8nM"])
 
-vegfa165_nrp1l05 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "Sheet1", ["Time 0.5nM", "RU 0.5nM"])
-vegfa165_nrp1l1 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "Sheet1", ["Time 1nM", "RU 1nM"])
-vegfa165_nrp1l2 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "Sheet1", ["Time 2nM", "RU 2nM"])
-vegfa165_nrp1l4 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "Sheet1", ["Time 4nM", "RU 4nM"])
-vegfa165_nrp1l8 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "Sheet1", ["Time 8nM", "RU 8nM"])
+vegfa165_nrp1l05 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "sheet1", ["Time 0.5nM", "RU 0.5nM"])
+vegfa165_nrp1l1 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "sheet1", ["Time 1nM", "RU 1nM"])
+vegfa165_nrp1l2 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "sheet1", ["Time 2nM", "RU 2nM"])
+vegfa165_nrp1l4 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "sheet1", ["Time 4nM", "RU 4nM"])
+vegfa165_nrp1l8 = import_and_clean_data("VEGFA165_NRP1_0.5-8nM_Lu2023.xlsx", "sheet1", ["Time 8nM", "RU 8nM"])
 
-vegfa165_nrp1h23 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "Sheet1", ["Time 2.3nM","RU 2.3nM"])
-vegfa165_nrp1h46 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "Sheet1", ["Time 4.6nM","RU 4.6nM"])
-vegfa165_nrp1h92 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "Sheet1", ["Time 9.2nM","RU 9.2nM"])
-vegfa165_nrp1h19 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "Sheet1", ["Time 19.5nM","RU 19.5nM"])
-vegfa165_nrp1h39 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "Sheet1", ["Time 39nM","RU 39nM"])
+vegfa165_nrp1h23 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "sheet1", ["Time 2.3nM","RU 2.3nM"])
+vegfa165_nrp1h46 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "sheet1", ["Time 4.6nM","RU 4.6nM"])
+vegfa165_nrp1h92 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "sheet1", ["Time 9.2nM","RU 9.2nM"])
+vegfa165_nrp1h19 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "sheet1", ["Time 19.5nM","RU 19.5nM"])
+vegfa165_nrp1h39 = import_and_clean_data("VEGFA165_NRP1_02.3-39nm_Herve2008.xlsx", "sheet1", ["Time 39nM","RU 39nM"])
 
 # Split the data int rise and decay
 
