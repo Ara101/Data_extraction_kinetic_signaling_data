@@ -11,7 +11,7 @@ print(os.getcwd()) # Prints the current working directory
 justin = 'C:/Users/dhlpablo_m2/Desktop/Git/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 lionel = 'C:/Users/Imoukhuede lab/OneDrive - UW/Desktop/GitHub/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 # Provide the new path here
-os.chdir(lionel) 
+os.chdir(justin) 
 #C:/Users/lione/Desktop/GitHub/meta-analysis-for-VEGF-signaling/data
 # Prints the new working directory
 print(os.getcwd())
