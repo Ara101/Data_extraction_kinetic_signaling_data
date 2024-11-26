@@ -145,58 +145,24 @@ def typical_dissociation(t, y_initial, koff):
     """
     return y_initial * np.exp(-koff * t)
 
-def plot_data(fitted_response, time_pt, response_data, function, fitted_param, label):
-    """
-    This function plots the data and the fitted data on the same graph against time.
-
-    Parameters
-    ----------
-    fitted_response : numpy array
-        The fitted response values from the dissociation function
-    time_pt : pandas Series
-        The series containing the time values
-    response_data : pandas Series
-        The series containing the experimental response values
-    function : function
-        The function that was used to fit the data
-    fitted_param : list
-        The parameters of the function
-    label : string
-        The label of the data
-
-    Returns
-    -------
-    None
-    """
-    
-    plt.plot(time_pt, response_data, 'o', label=f'Experimental Data: {label}')
-
-    
-    fitted_values = function(time_pt, *fitted_param)
-    plt.plot(time_pt, fitted_values, '-', label=f'Fitted Curve: {label}')
-
-    plt.xlabel('Time (t)')
-    plt.ylabel('Response')
-    plt.title(f'Data and Fitted Curve for {label}')
-
-    
-    plt.legend()
-    plt.show()
-
-    
-    print("Fitted parameters: ", fitted_param)
 
     # Fitting the data to its appropriate function
-def fit_data(time, response, p0, assumption):
+def fit_data(time, response, p0, assumption, testFile):
     """
     Function to fit the data to the function
 
     Parameters
     ----------
-    data : pandas dataframe
-        Dataframe containing the time and response values
-    function : function
-        The function that will be used to fit the data
+    time : pandas Series
+        The series containing the time values
+    response : pandas Series
+        The series containing the response values
+    p0 : list
+        The initial guess of the parameters
+    assumption : string
+        The assumption of the function
+    testFile : pandas dataframe
+        The dataframe containing the test data
 
     Returns
     -------
@@ -205,17 +171,7 @@ def fit_data(time, response, p0, assumption):
     pcov_k  
         The covariance of the parameters
     """
-
-    #if C == None:
-    #    C = 0
-    #if y_final == None:
-    #    y_final = 0
-    #if D == None:
-    #    D = 0
-    #if koff == None:
-    #        koff = 0 
-
-    
+ 
     if assumption == "baseline+steadystate":
         def baseline_steadystate_response(t, y_initial, y_final, kon):
             """
@@ -242,6 +198,24 @@ def fit_data(time, response, p0, assumption):
             return y_final * (1 - np.exp(-kon * t)) + y_initial
         function = baseline_steadystate_response
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
+        
+        plt.plot(testFile.iloc[:, 0], testFile.iloc[:, 1], 'o', label='Experimental Data')
+
+        fitted_response = baseline_steadystate_response(testFile.iloc[:, 0], *param_k)
+
+        plt.plot(testFile.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+
+
+        plt.xlabel('Time (t)')
+        plt.ylabel('Response')
+        plt.title('Data and Fitted Curve')
+
+        plt.legend()
+
+        plt.show()
+
+        print("Fitted parameters: ", param_k)
+
 
     elif assumption == "response to zero":
         def response_to_zero(t, C, y_initial, kon, koff):
@@ -270,6 +244,22 @@ def fit_data(time, response, p0, assumption):
         
         function = response_to_zero
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
+
+        plt.plot(testFile.iloc[:, 0], testFile.iloc[:, 1], 'o', label='Experimental Data')
+
+        fitted_response = response_to_zero(testFile.iloc[:, 0], *param_k)
+        plt.plot(testFile.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+
+
+        plt.xlabel('Time (t)')
+        plt.ylabel('Response')
+        plt.title('Data and Fitted Curve')
+
+        plt.legend()
+
+        plt.show()
+
+        print("Fitted parameters: ", param_k)
         
 
     elif assumption == "response to steady state":
@@ -300,6 +290,22 @@ def fit_data(time, response, p0, assumption):
         function = response_to_steady_state
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
 
+        plt.plot(testFile.iloc[:, 0], testFile.iloc[:, 1], 'o', label='Experimental Data')
+
+        fitted_response = response_to_steady_state(testFile.iloc[:, 0], *param_k)
+        plt.plot(testFile.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+
+
+        plt.xlabel('Time (t)')
+        plt.ylabel('Response')
+        plt.title('Data and Fitted Curve')
+
+        plt.legend()
+
+        plt.show()
+
+        print("Fitted parameters: ", param_k)
+
     elif assumption == "typical_association":
         def typical_association(t, y_final, conc, kon, koff):
             """
@@ -327,6 +333,22 @@ def fit_data(time, response, p0, assumption):
             return ( (y_final * conc) / (koff/kon + conc) ) * (1 - np.exp( (-1*(kon * conc + koff)) * t) )
         function = typical_association
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
+        plt.plot(testFile.iloc[:, 0], testFile.iloc[:, 1], 'o', label='Experimental Data')
+
+        fitted_response = typical_association(testFile.iloc[:, 0], *param_k)
+        plt.plot(testFile.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+
+
+        plt.xlabel('Time (t)')
+        plt.ylabel('Response')
+        plt.title('Data and Fitted Curve')
+
+        plt.legend()
+
+        plt.show()
+
+        print("Fitted parameters: ", param_k)
+
 
     elif assumption == "typical_dissociation":
         def typical_dissociation(t, y_initial, koff):
@@ -352,5 +374,22 @@ def fit_data(time, response, p0, assumption):
             return y_initial * np.exp(-koff * t)
         function = typical_dissociation
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
+        
+        plt.plot(testFile.iloc[:, 0], testFile.iloc[:, 1], 'o', label='Experimental Data')
+
+        fitted_response = typical_dissociation(testFile.iloc[:, 0], *param_k)
+        plt.plot(testFile.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+
+
+        plt.xlabel('Time (t)')
+        plt.ylabel('Response')
+        plt.title('Data and Fitted Curve')
+
+        plt.legend()
+
+        plt.show()
+
+        print("Fitted parameters: ", param_k)
+
 
     return param_k, pcov_k
