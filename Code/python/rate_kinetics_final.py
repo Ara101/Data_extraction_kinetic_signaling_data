@@ -1,4 +1,4 @@
-
+# Setup
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
@@ -149,11 +149,9 @@ def typical_dissociation(t, y_initial, koff):
 def plot_fitted_curve(assumption, data, param_k):
        
         if assumption == baseline_steadystate_response:
-            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data')
-
-            fitted_response = baseline_steadystate_response(data.iloc[:, 0], *param_k)
-
-            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data') # Plotting the data
+            fitted_response = baseline_steadystate_response(data.iloc[:, 0], *param_k) # Fitting the data to the function
+            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve') # Plotting the fitted curve
 
             plt.xlabel('Time (t)')
             plt.ylabel('Response')
@@ -166,10 +164,9 @@ def plot_fitted_curve(assumption, data, param_k):
             print("Fitted parameters: ", param_k)
 
         elif assumption == response_to_zero:
-            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data')
-
-            fitted_response = response_to_zero(data.iloc[:, 0], *param_k)
-            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data') # Plotting the data
+            fitted_response = response_to_zero(data.iloc[:, 0], *param_k) # Fitting the data to the function
+            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve') # Plotting the fitted curve
 
 
             plt.xlabel('Time (t)')
@@ -183,10 +180,9 @@ def plot_fitted_curve(assumption, data, param_k):
             print("Fitted parameters: ", param_k)
 
         elif assumption == response_to_steady_state:
-            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data')
-
-            fitted_response = response_to_steady_state(data.iloc[:, 0], *param_k)
-            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data') # Plotting the data
+            fitted_response = response_to_steady_state(data.iloc[:, 0], *param_k) # Fitting the data to the function
+            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve') # Plotting the fitted curve
 
             plt.xlabel('Time (t)')
             plt.ylabel('Response')
@@ -199,10 +195,9 @@ def plot_fitted_curve(assumption, data, param_k):
             print("Fitted parameters: ", param_k)
     
         elif assumption == typical_association:
-            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data')
-
-            fitted_response = typical_association(data.iloc[:, 0], *param_k)
-            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data') # Plotting the data
+            fitted_response = typical_association(data.iloc[:, 0], *param_k) # Fitting the data to the function
+            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve') # Plotting the fitted curve
 
 
             plt.xlabel('Time (t)')
@@ -216,10 +211,9 @@ def plot_fitted_curve(assumption, data, param_k):
             print("Fitted parameters: ", param_k)
 
         elif assumption == typical_dissociation:
-            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data')
-
-            fitted_response = typical_dissociation(data.iloc[:, 0], *param_k)
-            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve')
+            plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label='Experimental Data') # Plotting the data
+            fitted_response = typical_dissociation(data.iloc[:, 0], *param_k) # Fitting the data to the function
+            plt.plot(data.iloc[:, 0], fitted_response, '-', label='Fitted Curve') # Plotting the fitted curve
 
 
             plt.xlabel('Time (t)')
@@ -233,7 +227,7 @@ def plot_fitted_curve(assumption, data, param_k):
             print("Fitted parameters: ", param_k)
 
 
-    # Fitting the data to its appropriate function
+# Fitting the data to its appropriate function
 def fit_data(time, response, p0, assumption, data):
     """
     Function to fit the data to the function
@@ -284,8 +278,8 @@ def fit_data(time, response, p0, assumption, data):
             """
             return y_final * (1 - np.exp(-kon * t)) + y_initial
         function = baseline_steadystate_response
-        param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
-        plot_fitted_curve(function, data, param_k)
+        param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+        plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
 
     elif assumption == "response to zero":
         def response_to_zero(t, C, y_initial, kon, koff):
@@ -313,8 +307,8 @@ def fit_data(time, response, p0, assumption, data):
             return (C / (kon - koff)) * (np.exp(-koff * t) - np.exp(-kon * t)) +y_initial
         
         function = response_to_zero
-        param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
-        plot_fitted_curve(function, data, param_k)  
+        param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+        plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
 
     elif assumption == "response to steady state":
         def response_to_steady_state(t, y_initial, y_final, D, kon, koff):
@@ -342,8 +336,8 @@ def fit_data(time, response, p0, assumption, data):
             return y_final * ((1 - D * np.exp(-kon * t)) + (D - 1) * np.exp(-koff * t)) + y_initial
         
         function = response_to_steady_state
-        param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
-        plot_fitted_curve(function, data, param_k)
+        param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+        plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
 
     elif assumption == "typical_association":
         def typical_association(t, y_final, conc, kon, koff):
@@ -371,8 +365,8 @@ def fit_data(time, response, p0, assumption, data):
             kd = koff/kon
             return ( (y_final * conc) / (koff/kon + conc) ) * (1 - np.exp( (-1*(kon * conc + koff)) * t) )
         function = typical_association
-        param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
-        plot_fitted_curve(function, data, param_k)
+        param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+        plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
 
 
     elif assumption == "typical_dissociation":
@@ -398,7 +392,7 @@ def fit_data(time, response, p0, assumption, data):
             """
             return y_initial * np.exp(-koff * t)
         function = typical_dissociation
-        param_k, pcov_k = curve_fit(function, time, response, p0 = p0)
-        plot_fitted_curve(function, data, param_k)
+        param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+        plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
 
     return param_k, pcov_k

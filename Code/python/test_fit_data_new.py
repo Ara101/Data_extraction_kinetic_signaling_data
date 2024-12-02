@@ -3,7 +3,7 @@ from rate_kinetics_final import fit_data
 import numpy as np
 
 class TestRateKinetics(unittest.TestCase):
-    def test_fit_data(self):
+    def test_fit_data_baseline_steadystate(self):
     
         time = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
         response = np.array([0, 0.5, 0.9, 1.4, 1.8, 2.1, 2.6, 3.0, 3.4, 3.7, 4.1])
