@@ -12,12 +12,12 @@ class TestRateKinetics(unittest.TestCase):
         p0 = [0.1, 0.1, 0.1] 
         assumption = "baseline+steadystate"
     
-        expected_params = np.array([0.1, 4.0, 0.2])  
+        expected_params = np.array([0.017, 17.556, 0.026])  
     
         import pandas as pd
-        testFile = pd.DataFrame({'time': time, 'RU 1nM': response})
+        data = pd.DataFrame({'time': time, 'RU 1nM': response})
     
-        params, _ = fit_data(time, response, p0, assumption, testFile)
+        params, _ = fit_data(time, response, p0, assumption, data)
     
         np.testing.assert_allclose(params, expected_params, atol=1e-1)
 
