@@ -16,7 +16,7 @@ def importCleanDataCSV(file_name, columns):
     cleanData = data.iloc[:, columns].dropna()
     return cleanData
 
-justin = 'C:/Users/dhlpablo_m2/Desktop/Git/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
+justin = 'C:/Users/Justin/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 Lionel = 'C:/Users/Imoukhuede lab/OneDrive - UW/Desktop/GitHub/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 os.chdir(justin)
 
@@ -394,5 +394,7 @@ def fit_data(time, response, p0, assumption, data):
         function = typical_dissociation
         param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
         plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
-
+    
+    param_k, pcov_k = curve_fit(function, time, response, p0 = p0) # Fitting the data to the function
+    plot_fitted_curve(function, data, param_k) # Plotting the fitted curve
     return param_k, pcov_k
