@@ -17,8 +17,9 @@ def importCleanDataCSV(file_name, columns):
     return cleanData
 
 justin = 'C:/Users/Justin/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
+justin2 = 'C:/Users/dhlpablo_m2/Desktop/Git/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
 Lionel = 'C:/Users/Imoukhuede lab/OneDrive - UW/Desktop/GitHub/Data_extraction_kinetic_signaling_data/data/train_data/vegf_testdata'
-os.chdir(justin)
+os.chdir(justin2)
 
 
 # Function 1: Baseline falling to steady state response
