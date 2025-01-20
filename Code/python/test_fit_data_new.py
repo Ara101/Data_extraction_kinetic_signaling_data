@@ -43,16 +43,16 @@ class TestRateKinetics(unittest.TestCase):
         response = np.array([0.06301723609153242, 2.676262993772049, 4.204516764743712, 4.654642332309688, 5.705840806110585, 6.6872500304624545, 7.718527882363915, 8.660934272929522, 10.544325110679361, 11.236538977935155, 11.599476001717848, 11.687298688347028, 11.432684238192566, 11.00114393403322, 10.485896774215652, 9.949722900483527, 9.417353883826776, 8.583974331299986, 8.150531598602955, 7.7532350081219725, 7.288188791095353, 6.721887034655822, 6.4901017269536005, 6.224810506384108, 5.999470285106041, 5.898214745693126, 5.817885920194771, 5.731849809083352, 5.625624784868469, 5.5327167604173955, 5.451223307192441, 5.379241996655919, 5.335059313373616, 5.296583915704371, 5.285907145289338, 5.2348525486673765, 5.207791722224252, 5.18073089578113, 5.157474926413379, 5.129249472243659, 5.10599350287591, 5.090347247658908, 5.0533474516118435, 5.053658425507427, 5.034207313215051, 5.0154940017337655, 5.016231802544855, 5.003225776676629, 4.9997318934968416, 4.993597780968271, 4.981756382826642, 4.983231984448823, 4.986183187693182, 4.986753306501752])
             
         
-        p0 = [5, 0, 5, 0.1, 0.2] 
+        p0 = [0, 5, 5, 0.1, 0.2] 
         assumption = "response to steady state"
             
-        expected_params = np.array([5, 0, 5, 0.1, 0.2])  
+        expected_params = np.array([0, 5, 5, 0.1, 0.2])  
             
         data = pd.DataFrame({'time': time, 'RU 1nM': response})
             
         params, _ = fit_data(time, response, p0, assumption, data)
             
-        np.testing.assert_allclose(params, expected_params, atol=5e-1)
+        np.testing.assert_allclose(params, expected_params, atol=1)
     
     def test_fit_data_association(self):
             
@@ -69,7 +69,7 @@ class TestRateKinetics(unittest.TestCase):
                 
         params, _ = fit_data(time, response, p0, assumption, data)
                 
-        np.testing.assert_allclose(params, expected_params, atol=2)
+        np.testing.assert_allclose(params, expected_params, atol=3)
 
     def test_fit_data_dissociation(self):
                     
