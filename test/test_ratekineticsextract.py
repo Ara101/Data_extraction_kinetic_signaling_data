@@ -1,5 +1,5 @@
 import unittest
-from rate_kinetics_final import fit_data
+from rate_kinetic_sextract import fit_data
 import numpy as np
 import pandas as pd
 
