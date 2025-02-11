@@ -1,5 +1,22 @@
 import unittest
-from rate_kinetic_sextract import fit_data
+import os
+import sys
+
+# Get the current file's directory
+current_dir = os.path.dirname(os.path.abspath(__file__))
+print(current_dir)
+
+# Get the root directory (assuming your script is two levels deep in the directory structure)
+root_dir = os.path.abspath(os.path.join(current_dir, '..'))
+print(root_dir)
+
+# Add the root directory to the Python path
+sys.path.append(root_dir)
+
+# Now you can import your module
+#from pcr_optimizer.pcrprotocoloptimizer import pcr
+
+from rate_kinetics_extract.RateKineticsExtract import KineticAnalysis
 import numpy as np
 import pandas as pd
 
@@ -16,7 +33,7 @@ class TestRateKinetics(unittest.TestCase):
     
         data = pd.DataFrame({'time': time, 'RU 1nM': response})
     
-        params, _ = fit_data(time, response, p0, assumption, data)
+        params, _ = fit_data(time, response, p0, data)
     
         np.testing.assert_allclose(params, expected_params, atol=6e-1)
 
